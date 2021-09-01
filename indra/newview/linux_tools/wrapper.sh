@@ -88,7 +88,7 @@ cd "${RUN_PATH}"
 export SAVED_LD_LIBRARY_PATH="${LD_LIBRARY_PATH}"
 
 # Add our library directory
-export LD_LIBRARY_PATH="$PWD/lib:${LD_LIBRARY_PATH}"
+export LD_LIBRARY_PATH="$PWD/lib:$PWD/bin/llplugin:${LD_LIBRARY_PATH}"
 
 # Copy "$@" to ARGS array specifically to delete the --skip-gridargs switch.
 # The gridargs.dat file is no more, but we still want to avoid breaking
