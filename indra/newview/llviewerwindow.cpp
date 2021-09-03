@@ -1626,6 +1626,7 @@ BOOL LLViewerWindow::handleTranslatedKeyDown(KEY key,  MASK mask, BOOL repeated)
 		gAgent.clearAFK();
 	}
 
+#ifdef _WIN32
 	// *NOTE: We want to interpret KEY_RETURN later when it arrives as
 	// a Unicode char, not as a keydown.  Otherwise when client frame
 	// rate is really low, hitting return sends your chat text before
@@ -1638,6 +1639,7 @@ BOOL LLViewerWindow::handleTranslatedKeyDown(KEY key,  MASK mask, BOOL repeated)
         if (keyboard_focus && !keyboard_focus->wantsReturnKey())
     		return FALSE;
 	}
+#endif
 
     // remaps, handles ignored cases and returns back to viewer window.
     return gViewerInput.handleKey(key, mask, repeated);
