@@ -19,12 +19,10 @@ if (LINUX)
         gthread-2.0
         pango
         pangoft2
-        pangox
         )
 
     if(USE_X11)
       list(APPEND PKGCONFIG_PACKAGES 
-            pangoxft
             x11
             xinerama
             )

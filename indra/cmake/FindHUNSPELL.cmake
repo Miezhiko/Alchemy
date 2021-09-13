@@ -7,12 +7,14 @@
 #  HUNSPELL_FOUND, If false, do not try to use HUNSPELL.
 
 find_path(HUNSPELL_INCLUDE_DIR hunspell.h
-  PATH_SUFFIXES hunspell
+  /usr/local/include/hunspell
+  /usr/include/hunspell
   )
 
-set(HUNSPELL_NAMES ${HUNSPELL_NAMES} libhunspell-1.3 libhunspell)
+set(HUNSPELL_NAMES ${HUNSPELL_NAMES} hunspell)
 find_library(HUNSPELL_LIBRARY
   NAMES ${HUNSPELL_NAMES}
+  PATHS /usr/lib /usr/lib64 /usr/local/lib
   )
 
 if (HUNSPELL_LIBRARY AND HUNSPELL_INCLUDE_DIR)
@@ -28,7 +30,7 @@ if (HUNSPELL_FOUND)
   endif (NOT HUNSPELL_FIND_QUIETLY)
 else (HUNSPELL_FOUND)
   if (HUNSPELL_FIND_REQUIRED)
-    message(FATAL_ERROR " * * *\nCould not find HUNSPELL library! * * *")
+    message(FATAL_ERROR "\nCould not find HUNSPELL library!")
   endif (HUNSPELL_FIND_REQUIRED)
 endif (HUNSPELL_FOUND)
 

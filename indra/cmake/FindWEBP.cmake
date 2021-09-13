@@ -1,0 +1,16 @@
+FIND_PATH(WEBP_INCLUDE_DIR decode.h encode.h
+/usr/local/include/webp
+/usr/include/webp
+)
+
+SET(WEBP_NAMES ${WEBP_NAMES} webp)
+FIND_LIBRARY(WEBP_LIBRARY
+  NAMES ${WEBP_NAMES}
+  PATHS /usr/lib /usr/lib64 /usr/local/lib
+  )
+
+IF (WEBP_LIBRARY AND WEBP_INCLUDE_DIR)
+    set(WEBP_INCLUDE_DIRS ${WEBP_INCLUDE_DIR})
+ELSE ()
+  MESSAGE(FATAL_ERROR "Could not find WEBP")
+ENDIF (WEBP_LIBRARY AND WEBP_INCLUDE_DIR)

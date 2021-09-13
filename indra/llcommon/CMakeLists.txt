@@ -308,7 +308,9 @@ target_link_libraries(
     ${RT_LIBRARY}
     )
 
-add_dependencies(llcommon stage_third_party_libs)
+if (NOT USESYSTEMLIBS)
+  add_dependencies(llcommon stage_third_party_libs)
+endif()
 
 if(USE_PRECOMPILED_HEADERS AND ${CMAKE_VERSION} VERSION_GREATER "3.15.0") 
   target_precompile_headers(llcommon
