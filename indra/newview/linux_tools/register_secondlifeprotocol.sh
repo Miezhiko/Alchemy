@@ -14,11 +14,20 @@ if [ -z "$HANDLER" ]; then
 fi
 
 # Register handler for GNOME-aware apps
-LLGCONFTOOL=gconftool
-if which ${LLGCONFTOOL} >/dev/null; then
-    (${LLGCONFTOOL} -s -t string /desktop/gnome/url-handlers/secondlife/command "${HANDLER} \"%s\"" && ${LLGCONFTOOL} -s -t bool /desktop/gnome/url-handlers/secondlife/enabled true) || echo Warning: Did not register secondlife:// handler with GNOME: ${LLGCONFTOOL} failed.
-else
-    echo Warning: Did not register secondlife:// handler with GNOME: ${LLGCONFTOOL} not found.
+LLXDGTOOL=xdg-mime
+if [ `which $LLXDGTOOL` ]; then
+    XDGDIR="$(xdg-user-dir)/.local/share/applications"
+    mkdir -p "${XDGDIR}"
+    LLXDGPROTOFILE=${XDGDIR}/secondlife.desktop
+    cat > ${LLXDGPROTOFILE} <<EOF || echo Warning: Did not register secondlife:// handler with XDG: Could not write ${LLXDGPROTOFILE} 
+[Desktop Entry]
+Name=Second Life
+Exec=${HANDLER} '%u'
+Type=Application
+Terminal=false
+MimeType=x-scheme-handler/secondlife;
+EOF
+$LLXDGTOOL default secondlife.desktop x-scheme-handler/secondlife
 fi
 
 # Register handler for KDE-aware apps
@@ -45,4 +54,3 @@ EOF
         fi
     fi
 done
-
