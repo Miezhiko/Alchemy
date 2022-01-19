@@ -132,7 +132,6 @@ set(viewer_SOURCE_FILES
     alfloaterparticleeditor.cpp
     alfloaterregiontracker.cpp
     alpanelaomini.cpp
-    alpanelaopulldown.cpp
     alpanelmusicticker.cpp
     alpanelradaralert.cpp
     alpanelquicksettings.cpp
@@ -811,7 +810,6 @@ set(viewer_HEADER_FILES
     alfloaterparticleeditor.h
     alfloaterregiontracker.h
     alpanelaomini.h
-    alpanelaopulldown.h
     alpanelmusicticker.h
     alpanelradaralert.h
     alpanelquicksettings.h
