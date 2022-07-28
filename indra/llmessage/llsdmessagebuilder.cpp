@@ -89,13 +89,6 @@ void LLSDMessageBuilder::nextBlock(const char* blockname)
 	}
 }
 
-// TODO: Remove this horror...
-BOOL LLSDMessageBuilder::removeLastBlock()
-{
-	/* TODO: finish implementing this */
-	return FALSE;
-}
-
 void LLSDMessageBuilder::addBinaryData(
 	const char* varname, 
 	const void* data,
@@ -394,9 +387,6 @@ const LLSD& LLSDMessageBuilder::getMessage() const
 {
 	 return mCurrentMessage;
 }
-
-//virtual
-void LLSDMessageBuilder::setBuilt(BOOL b) { mbSBuilt = b; }
 
 //virtual 
 BOOL LLSDMessageBuilder::isBuilt() const {return mbSBuilt;}
