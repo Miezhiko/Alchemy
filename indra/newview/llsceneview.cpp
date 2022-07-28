@@ -270,6 +270,7 @@ void LLSceneView::draw()
 			//plot triangles
 			for (U32 i = 0; i < count; ++i)
 			{
+				U32 tri_count = triangles[idx][i];
 				F32 y = (F32) (tri_count-tri_domain[0])/triangle_range*tri_rect.getHeight()+tri_rect.mBottom;
 				F32 x = (F32) i / count * tri_rect.getWidth() + tri_rect.mLeft;
 
