@@ -1473,7 +1473,6 @@ void LLModelPreview::genLODs(S32 which_lod, U32 decimation, bool enforce_tri_lim
         mModel[lod].resize(mBaseModel.size());
         mVertexBuffer[lod].clear();
 
-        U32 actual_verts = 0;
         U32 submeshes = 0;
 
         mRequestedTriangleCount[lod] = (S32)((F32)triangle_count / triangle_ratio);
@@ -1579,7 +1578,6 @@ void LLModelPreview::genLODs(S32 which_lod, U32 decimation, bool enforce_tri_lim
                 buff->getIndexStrider(index);
 
                 target_model->setVolumeFaceData(names[i], pos, norm, tc, index, buff->getNumVerts(), buff->getNumIndices());
-                actual_verts += buff->getNumVerts();
                 ++submeshes;
 
                 if (!validate_face(target_model->getVolumeFace(names[i])))
