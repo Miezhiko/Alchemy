@@ -1416,7 +1416,6 @@ void LLModelPreview::genLODs(S32 which_lod, U32 decimation, bool enforce_tri_lim
                 genBuffers(5, false);
             }
 
-            U32 tri_count = 0;
             for (U32 i = 0; i < mVertexBuffer[5][mdl].size(); ++i)
             {
                 LLVertexBuffer* buff = mVertexBuffer[5][mdl][i];
@@ -1427,7 +1426,6 @@ void LLModelPreview::genLODs(S32 which_lod, U32 decimation, bool enforce_tri_lim
                 {
                     glodInsertElements(mObject[mdl], i, GL_TRIANGLES, num_indices, GL_UNSIGNED_SHORT, (U8*)mVertexBuffer[5][mdl][i]->getIndicesPointer(), 0, 0.f);
                 }
-                tri_count += num_indices / 3;
                 stop_gloderror();
             }
 
@@ -1475,7 +1473,6 @@ void LLModelPreview::genLODs(S32 which_lod, U32 decimation, bool enforce_tri_lim
         mModel[lod].resize(mBaseModel.size());
         mVertexBuffer[lod].clear();
 
-        U32 actual_tris = 0;
         U32 actual_verts = 0;
         U32 submeshes = 0;
 
@@ -1582,7 +1579,6 @@ void LLModelPreview::genLODs(S32 which_lod, U32 decimation, bool enforce_tri_lim
                 buff->getIndexStrider(index);
 
                 target_model->setVolumeFaceData(names[i], pos, norm, tc, index, buff->getNumVerts(), buff->getNumIndices());
-                actual_tris += buff->getNumIndices() / 3;
                 actual_verts += buff->getNumVerts();
                 ++submeshes;
 
@@ -2304,10 +2300,7 @@ void LLModelPreview::clearBuffers()
 
 void LLModelPreview::genBuffers(S32 lod, bool include_skin_weights)
 {
-    U32 tri_count = 0;
-    U32 vertex_count = 0;
     U32 mesh_count = 0;
-
 
     LLModelLoader::model_list* model = NULL;
 
@@ -2439,10 +2432,7 @@ void LLModelPreview::genBuffers(S32 lod, bool include_skin_weights)
 
             mVertexBuffer[lod][mdl].push_back(vb);
 
-            vertex_count += num_vertices;
-            tri_count += num_indices / 3;
             ++mesh_count;
-
         }
     }
 }

@@ -237,7 +237,9 @@ void LLViewerTextureList::doPrefetchImages()
         }
         file.close();
 	}
-    S32 texture_count = 0;
+#ifdef SHOW_DEBUG
+  S32 texture_count = 0;
+#endif
 	for (LLSD::array_const_iterator iter = imagelist.beginArray(), end = imagelist.endArray();
 		 iter != end; ++iter)
 	{
@@ -251,7 +253,9 @@ void LLViewerTextureList::doPrefetchImages()
 			LLViewerFetchedTexture* image = LLViewerTextureManager::getFetchedTexture(uuid, FTT_DEFAULT, MIPMAP_TRUE, LLGLTexture::BOOST_NONE, texture_type);
 			if (image)
 			{
-                texture_count += 1;
+#ifdef SHOW_DEBUG
+        texture_count += 1;
+#endif
 				image->addTextureStats((F32)pixel_area);
 			}
 		}
@@ -1165,14 +1169,13 @@ F32 LLViewerTextureList::updateImagesFetchTextures(F32 max_time)
 		}
 	}
 	
-	S32 fetch_count = 0;
 	size_t min_update_count = llmin(MIN_UPDATE_COUNT,(S32)(entries.size()-max_priority_count));
 	S32 min_count = max_priority_count + min_update_count;
 	for (entries_list_t::iterator iter3 = entries.begin();
 		 iter3 != entries.end(); )
 	{
 		LLViewerFetchedTexture* imagep = *iter3++;
-		fetch_count += (imagep->updateFetch() ? 1 : 0);
+		imagep->updateFetch();
 		if (min_count <= min_update_count)
 		{
 			mLastFetchKey = LLTextureKey(imagep->getID(), (ETexListType)imagep->getTextureListType());
