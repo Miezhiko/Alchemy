@@ -34,13 +34,15 @@ project(${ROOT_PROJECT_NAME})
 # Until we decide to set -std=c++14 in viewer-build-variables/variables, set
 # it locally here: we want to at least prevent inadvertently reintroducing
 # viewer code that would fail with C++14.
-if(MSVC)
-  set(CMAKE_CXX_STANDARD 20)
-else()
-  set(CMAKE_OBJCXX_STANDARD 17)
-  set(CMAKE_CXX_STANDARD 17)
-endif()
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_THREAD_LIBS_INIT "-lpthread")
+set(CMAKE_HAVE_THREADS_LIBRARY 1)
+set(CMAKE_USE_WIN32_THREADS_INIT 0)
+set(CMAKE_USE_PTHREADS_INIT 1)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   enable_language(OBJCXX)
